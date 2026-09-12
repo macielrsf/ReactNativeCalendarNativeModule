@@ -3,7 +3,9 @@ import {CalendarModule} from '../../modules';
 
 export const CalendarButton = () => {
   const onPress = () => {
-    CalendarModule.createCalendarEvent('New Event', 'My Calendar');
+    const startDate = Date.now() + 60 * 60 * 1000;
+    const endDate = startDate + 60 * 60 * 1000;
+    void CalendarModule.addEvent('New Event', startDate, endDate);
   };
 
   return (

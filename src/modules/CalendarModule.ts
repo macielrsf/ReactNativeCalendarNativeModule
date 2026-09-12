@@ -1,16 +1,79 @@
-/**
- * This exposes the native CalendarModule module as a JS module. This has a
- * function 'createCalendarEvent' which takes the following parameters:
- *
- * 1. String name: A string representing the name of the event
- * 2. String location: A string representing the location of the event
- */
-import {NativeModules} from 'react-native';
+import {EmitterSubscription, NativeEventEmitter, NativeModules} from 'react-native';
+import {useEffect} from 'react';
 
-const {CalendarModule: calendarModule} = NativeModules;
-
-interface CalendarInterface {
-  createCalendarEvent(name: string, location: string): void;
+export interface CalendarEvent {
+  id: string;
+  eventId?: string;
+  title: string;
+  description: string;
+  startDate: number;
+  endDate: number;
+  calendarId?: string;
+  calendarName?: string;
+  accountName?: string;
+  accountType?: string;
 }
 
-export const CalendarModule = calendarModule as CalendarInterface;
+export interface CalendarAccount {
+  id: string;
+  name: string;
+  accountName: string;
+  accountType: string;
+  ownerAccount: string;
+  isGoogle: boolean;
+  isVisible: boolean;
+  isPrimary: boolean;
+  isWritable: boolean;
+  accessLevel: number;
+}
+
+interface CalendarModuleInterface {
+  getEvents(): Promise<CalendarEvent[]>;
+  getCalendars(): Promise<CalendarAccount[]>;
+  addEvent(title: string, startDate: number, endDate: number): Promise<string>;
+  addEventToCalendar(
+    title: string,
+    startDate: number,
+    endDate: number,
+    calendarId: string,
+  ): Promise<string>;
+  startObserving(): void;
+  stopObserving(): void;
+  addListener(eventName: string): void;
+  removeListeners(count: number): void;
+}
+
+export interface CalendarChangedEvent {
+  uri?: string;
+}
+
+const nativeCalendarModule = NativeModules.CalendarModule as CalendarModuleInterface;
+let calendarEventEmitter: NativeEventEmitter | null = null;
+
+const getCalendarEventEmitter = () => {
+  if (!nativeCalendarModule) {
+    throw new Error('CalendarModule native module is not available.');
+  }
+
+  if (!calendarEventEmitter) {
+    calendarEventEmitter = new NativeEventEmitter(nativeCalendarModule);
+  }
+
+  return calendarEventEmitter;
+};
+
+export const CalendarModule = nativeCalendarModule;
+
+export const addCalendarChangedListener = (
+  listener: (event: CalendarChangedEvent) => void,
+): EmitterSubscription =>
+  getCalendarEventEmitter().addListener('onCalendarChanged', listener);
+
+export const useCalendarChanged = (
+  listener: (event: CalendarChangedEvent) => void,
+) => {
+  useEffect(() => {
+    const subscription = addCalendarChangedListener(listener);
+    return () => subscription.remove();
+  }, [listener]);
+};

@@ -7,13 +7,12 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ReactShadowNode
 import com.facebook.react.uimanager.ViewManager
 
-class CalendarModulePackage : ReactPackage {
+class CalendarPackage : ReactPackage {
     override fun createViewManagers(
         reactContext: ReactApplicationContext
     ): MutableList<ViewManager<View, ReactShadowNode<*>>> = mutableListOf()
 
-    @Deprecated("Migrate to [BaseReactPackage] and implement [getModule] instead.")
     override fun createNativeModules(
         reactContext: ReactApplicationContext
-    ): MutableList<NativeModule> = listOf(CalendarModule(reactContext)).toMutableList()
+    ): MutableList<NativeModule> = mutableListOf(CalendarModule(reactContext))
 }
