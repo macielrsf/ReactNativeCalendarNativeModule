@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {
   addCalendarChangedListener,
   CalendarAccount,
@@ -106,10 +106,18 @@ export const useCalendarData = (hasPermission: boolean) => {
     return () => subscription.remove();
   }, [hasPermission, reload]);
 
+  const filteredEvents = useMemo(
+    () =>
+      selectedCalendarId
+        ? events.filter(event => event.calendarId === selectedCalendarId)
+        : events,
+    [events, selectedCalendarId],
+  );
+
   return {
     calendars,
     error,
-    events,
+    events: filteredEvents,
     fetchCalendars,
     fetchEvents,
     isLoading,
