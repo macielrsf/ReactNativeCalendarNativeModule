@@ -125,19 +125,11 @@ npm test -- --runInBand
 
 ## Capturas de tela / Screenshots
 
-Add application screenshots to this section. Suggested files:
+### Calendar events list
+<img width="360" height="800" alt="Screenshot_1789221048" src="https://github.com/user-attachments/assets/9e14c759-22a8-4e6f-88a4-da26677f2102" />
 
-```text
-docs/screenshots/calendar-events.png
-docs/screenshots/google-calendar-sync.png
-```
-
-Example:
-
-```md
-![Calendar events list](docs/screenshots/calendar-events.png)
-![Google Calendar synchronization](docs/screenshots/google-calendar-sync.png)
-```
+### Google Calendar
+<img width="360" height="800" alt="Screenshot_1789221058" src="https://github.com/user-attachments/assets/009e4529-f027-4968-a302-d9ad76e28e65" />
 
 ---
 
