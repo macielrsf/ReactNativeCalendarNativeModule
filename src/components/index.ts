@@ -1,4 +1,3 @@
-export { CalendarButton } from './CalendarButton/CalendarButton';
 export {CalendarEventForm} from './CalendarEventForm';
 export {CalendarEventItem} from './CalendarEventItem';
 export {CalendarEventList} from './CalendarEventList';
