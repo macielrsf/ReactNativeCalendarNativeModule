@@ -7,10 +7,10 @@
  */
 import {NativeModules} from 'react-native';
 
-const {CalendarModule} = NativeModules;
+const {CalendarModule: calendarModule} = NativeModules;
 
 interface CalendarInterface {
   createCalendarEvent(name: string, location: string): void;
 }
 
-export default CalendarModule as CalendarInterface;
+export const CalendarModule = calendarModule as CalendarInterface;

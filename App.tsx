@@ -10,7 +10,7 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
-import NewModuleButton from './src/components/CalendarButton/CalendarButton';
+import {CalendarButton} from './src/components';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -28,7 +28,7 @@ function AppContent() {
 
   return (
     <View style={[styles.container, { paddingTop: safeAreaInsets.top }]}>
-      <NewModuleButton />
+      <CalendarButton />
     </View>
   );
 }

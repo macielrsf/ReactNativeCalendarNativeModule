@@ -1,7 +1,7 @@
 import { Button, StyleSheet, View } from 'react-native';
-import CalendarModule from '../../modules/CalendarModule';
+import {CalendarModule} from '../../modules';
 
-const NewModuleButton = () => {
+export const CalendarButton = () => {
   const onPress = () => {
     CalendarModule.createCalendarEvent('New Event', 'My Calendar');
   };
@@ -23,5 +23,3 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
-
-export default NewModuleButton;
