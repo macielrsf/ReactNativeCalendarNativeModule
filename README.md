@@ -125,6 +125,9 @@ npm test -- --runInBand
 
 ## Capturas de tela / Screenshots
 
+### Video
+https://github.com/user-attachments/assets/054f7fc1-3163-4a64-b29e-2b71e02119ed
+
 ### Calendar events list
 <img width="360" height="800" alt="Screenshot_1789221048" src="https://github.com/user-attachments/assets/9e14c759-22a8-4e6f-88a4-da26677f2102" />
 
